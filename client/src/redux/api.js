@@ -18,3 +18,8 @@ export const googlesignin = (result) => {
     const response = API.post("users/googleSignIn", result);
     return response;
 };
+
+
+export const createTour = (tourData) => {
+    return API.post("/tour", tourData);
+}
