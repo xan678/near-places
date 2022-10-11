@@ -11,6 +11,10 @@ import {useDispatch} from "react-redux";
 import { useDebugValue } from 'react';
 import { setUser } from './redux/features/authSlice';
 import AddEditTour from './pages/AddEditTour';
+import SingleTour from './pages/SingleTour';
+import Dashboard from './pages/Dashboard';
+import PrivateRoute from './component/PrivateRoute';
+import NotFound from './pages/NotFound';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,11 +29,18 @@ function App() {
         <Header/>
       <ToastContainer/>
       <Routes>
-        <Route path='/' element = {<Home/>}></Route>
-        <Route path='/login' element = {<Login/>}></Route>
-        <Route path='/register' element = {<Register/>}></Route>
-        <Route path='/addTour' element = {<AddEditTour/>}></Route>
-        <Route path='/editTour/:id' element = {<AddEditTour/>}></Route>
+        <Route path='/' element = {<Home/>}/>
+        <Route path='/login' element = {<Login/>}/>
+        <Route path='/register' element = {<Register/>}/>
+        <Route path='/addTour' element = {<PrivateRoute><AddEditTour/></PrivateRoute>}/>
+        <Route path='/editTour/:id' element = {<PrivateRoute><AddEditTour/></PrivateRoute>}/>
+        <Route path='/tour/:id' element = {<SingleTour/>}/>
+        <Route path='/dashboard' element = {
+        <PrivateRoute>
+          <Dashboard/>  
+        </PrivateRoute>
+        }/>
+        <Route path='*' element = {<NotFound/>}/>
       </Routes>
     </div>
     </BrowserRouter>
